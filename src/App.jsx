@@ -1,4 +1,4 @@
-import { useState} from "react";
+import { useImperativeHandle, useState} from "react";
 import Guitar from "./components/guitar";
 import Header from "./components/Header";
 import { db } from "./data/db";
@@ -9,14 +9,23 @@ function App() {
     const [cart, setCart] = useState([])
 
     function addToCart(item){
-        
-        setCart(prevCart => [...prevCart,item])
-        
+
+        const itemExists = cart.findIndex(guitar => guitar.id === item.id)
+        if (itemExists >= 0) {
+            const updateCart = [...cart]
+            updateCart[itemExists].quantity++
+            setCart(updateCart)
+
+        }else{
+            item.quantity = 1           
+            setCart([...cart,item])    
+        }
     }
 
     return (
         <>
-            <Header />
+            <Header
+                cart={cart} />
 
             <main className="container-xl mt-5">
                 <h2 className="text-center">Nuestra Colección</h2>

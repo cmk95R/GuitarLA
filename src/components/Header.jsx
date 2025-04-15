@@ -1,4 +1,4 @@
-export default function Header() {
+export default function Header({cart}) {
 
     return (
         <header className="py-5 header">
@@ -28,6 +28,9 @@ export default function Header() {
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {cart.map( guitar => (
+
+                                    
                                     <tr>
                                         <td>
                                             <img className="img-fluid" src="./public/img/guitarra_02.jpg" alt="imagen guitarra" />
@@ -60,6 +63,7 @@ export default function Header() {
                                             </button>
                                         </td>
                                     </tr>
+                                    ))}
                                 </tbody>
                             </table>
 
